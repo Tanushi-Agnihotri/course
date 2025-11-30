@@ -6,8 +6,9 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export type Session = {
-  user: { id: string; name: string };
-  accessToken?: string;
+  id: string;
+  name: string;
+  role: string;
 };
 
 const secretKey = process.env.SESSION_SECRET_KEY!;

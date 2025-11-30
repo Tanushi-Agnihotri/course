@@ -17,10 +17,7 @@ export async function signinClient(payload: SignInPayload) {
 }
 
 export async function getSession() {
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/me`,
-    { withCredentials: true }
-  );
+  const res = await AxiosInstance.get("/auth/me");
   return res.data;
 }
 

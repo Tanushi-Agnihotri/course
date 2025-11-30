@@ -13,7 +13,9 @@ export default function CoursesPage() {
     const { mutate: deleteCourse } = useDeleteCourse();
     const router = useRouter();
 
-    const isAdmin = session?.user?.role === "admin";
+    const isAdmin = session?.role === "admin";
+
+
 
     if (isLoading) return <div className="p-8 text-center">Loading courses...</div>;
     if (error) return <div className="p-8 text-center text-red-500">Error loading courses</div>;

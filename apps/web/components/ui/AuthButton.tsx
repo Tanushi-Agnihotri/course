@@ -35,13 +35,13 @@ export default function AuthButton() {
         return <div className="text-sm">Loading...</div>;
     }
 
-    if (session?.user) {
+    if (session?.id) {
         return (
             <div className="flex items-center gap-4">
                 <Link href="/profile" className="text-sm font-medium hover:underline">
                     Profile
                 </Link>
-                <span className="text-sm font-medium">{session.user.name}</span>
+                <span className="text-sm font-medium">{session.name}</span>
                 <button
                     onClick={handleSignOut}
                     className="text-sm bg-white text-blue-600 px-3 py-1 rounded hover:bg-gray-100 transition-colors"
