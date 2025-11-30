@@ -100,3 +100,15 @@ export function useUpdateCourse() {
     },
   });
 }
+export function useUpdateUser() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await AxiosInstance.patch("/user/me", data);
+      return response.data;
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["session"] });
+    },
+  });
+}

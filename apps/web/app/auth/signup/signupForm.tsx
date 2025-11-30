@@ -86,9 +86,12 @@ export default function SignUpForm() {
             />
           </div>
 
+        <div className="flex items-center justify-center">
           <SubmitButton disabled={isPending}>
             {isPending ? "Signing up..." : "Sign Up"}
-          </SubmitButton>
+          </SubmitButton>    
+        </div>
+
         </form>
 
         <p className="text-center text-sm text-gray-600 mt-4">

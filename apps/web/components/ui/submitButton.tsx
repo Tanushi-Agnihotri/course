@@ -12,7 +12,7 @@ const SubmitButton = ({ children, disabled }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
   const isPending = pending || disabled;
   return (
-    <Button type="submit" aria-disabled={isPending} disabled={isPending} className='w-full mt-2 bg-blue-700 text-white'>
+    <Button type="submit" aria-disabled={isPending} disabled={isPending} className=' w-75 mt-2 bg-blue-700 text-white'>
       {isPending ? "submitting..." : children}
     </Button>
   )
