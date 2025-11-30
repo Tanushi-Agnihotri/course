@@ -4,22 +4,10 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
 import SubmitButton from "@/components/ui/submitButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signinClient } from "@/lib/api";
-
-/**
- * Signin payload shape — change if your backend expects different fields
- */
-type SigninPayload = {
-  email: string;
-  password: string;
-};
-
-
+import { useSignin } from "@/lib/hooks";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -27,23 +15,25 @@ export default function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signin = useMutation({
-    mutationFn: (body: SigninPayload) => signinClient(body),
-    onSuccess: () => {
-      // refresh server components (if you rely on server session) and redirect
-      router.refresh();
-      router.push("/");
-    },
-  });
+  const signin = useSignin();
 
   // React Query v5 uses isPending; v4 uses isLoading
-  const isPending = (signin as any).isPending ?? (signin as any)  .isLoading ?? false;
+  const isPending = (signin as any).isPending ?? (signin as any).isLoading ?? false;
 
   const serverMessage = signin.error ? (signin.error as any)?.message ?? String(signin.error) : undefined;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    signin.mutate({ email, password });
+    signin.mutate(
+      { email, password },
+      {
+        onSuccess: () => {
+          // refresh server components (if you rely on server session) and redirect
+          router.refresh();
+          router.push("/");
+        },
+      }
+    );
   };
 
   return (

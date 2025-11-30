@@ -48,4 +48,10 @@ export class AuthController {
       user: { id: result.id, email: result.name },
     };
   }
+
+  @Post('signout')
+  async logoutUser(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('session');
+    return { message: 'Logged out' };
+  }
 }
