@@ -54,4 +54,22 @@ export class AuthController {
     res.clearCookie('session');
     return { message: 'Logged out' };
   }
+
+  @Get('me')
+  async getMe(@Req() req: any) {
+    // Cookie parser should be enabled in main.ts for req.cookies to work
+    // If not, we might need to parse 'cookie' header manually or ensure cookie-parser is installed
+    // NestJS by default with Express adapter usually needs cookie-parser middleware
+    const token = req.cookies?.['session'];
+
+    if (!token) {
+      return null; // Or throw UnauthorizedException, but returning null is often easier for frontend 'not logged in' check
+    }
+
+    try {
+      return await this.authService.getUserProfile(token);
+    } catch (e) {
+      return null;
+    }
+  }
 }

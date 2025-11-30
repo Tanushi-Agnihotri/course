@@ -25,7 +25,7 @@ export class UserService {
       return await this.prisma.users.create({
         data: {
           password: hashPassword,
-          role: Role.User,
+          role: role || Role.User,
           ...user,
         },
       });
@@ -38,6 +38,12 @@ export class UserService {
   async findByEmail(email: string): Promise<users | null> {
     return await this.prisma.users.findUnique({
       where: { email },
+    });
+  }
+
+  async findById(id: string): Promise<users | null> {
+    return await this.prisma.users.findUnique({
+      where: { id },
     });
   }
 
@@ -54,7 +60,7 @@ export class UserService {
     // Token Generation
     const payload = {
       id: user.id,
-      role: Role.User,
+      role: user.role,
     };
 
     const token = await this.jwtService.signAsync(payload);

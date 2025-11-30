@@ -4,7 +4,9 @@
     "moduleResolution": "node",
     "strictPropertyInitialization": false,
     "target": "ES2019",
-    "lib": ["ES2019"],
+    "lib": [
+      "ES2019"
+    ],
     "outDir": "./dist",
     "sourceMap": true,
     "declaration": true,
@@ -15,5 +17,9 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "resolvePackageJsonExports": false
-  }
+  },
+  "include": [
+    "src",
+    "generated"
+  ]
 }

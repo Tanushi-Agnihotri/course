@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSession } from "@/lib/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { AxiosInstance } from "@/app/services/auth/AxiosInstance";
 
 export default function AuthButton() {
     const { data: session, isLoading } = useSession();
@@ -20,7 +21,8 @@ export default function AuthButton() {
         // For now, we'll just clear client state and redirect, assuming cookie is session-based or we add an endpoint
         // Ideally, we should call an API endpoint to clear the cookie.
         try {
-            await fetch('/api/auth/signout', { method: 'POST' }); // We might need to implement this or use a simple link
+            // Use AxiosInstance to ensure correct base URL and credentials
+            await AxiosInstance.post('/auth/signout', {}, { withCredentials: true });
         } catch (e) {
             console.error(e);
         }

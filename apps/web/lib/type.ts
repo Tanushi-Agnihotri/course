@@ -1,15 +1,15 @@
 import { z } from "zod";
 
 export type FormState =
-{
-    error?:{
-        name?:string[],
-        email?:string[],
-        password?:string[];
-    };
-    message?:string;
-}
-| undefined;
+    {
+        error?: {
+            name?: string[],
+            email?: string[],
+            password?: string[];
+        };
+        message?: string;
+    }
+    | undefined;
 
 
 export const SignupFormSchema = z.object({
@@ -40,3 +40,12 @@ export const SigninFormSchema = z.object({
         .string()
         .min(8, { message: "Be at least 8 characters long" })
 });
+
+export interface Course {
+    id: string;
+    title: string;
+    description: string;
+    price?: number;
+    createdAt: string;
+    updatedAt: string;
+}
