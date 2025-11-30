@@ -11,16 +11,28 @@ interface ProfileCardProps {
     };
 }
 
+import { useAppStore } from '@/lib/store';
+
 const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [name, setName] = useState(user.name);
     const { mutate: updateUser, isPending } = useUpdateUser();
+    const setUser = useAppStore((state) => state.setUser);
+    const storeUser = useAppStore((state) => state.user);
+
+    React.useEffect(() => {
+        if (user) {
+            setUser(user);
+        }
+    }, [user, setUser]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         updateUser({ name }, {
-            onSuccess: () => {
+            onSuccess: (data) => {
                 setIsEditing(false);
+                // Update global store
+                setUser({ ...user, name: data.name });
             }
         });
     };
@@ -71,6 +83,9 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
                     <div>
                         <label className="block text-sm font-medium text-gray-500">Role</label>
                         <p className="text-lg text-gray-900 capitalize">{user.role}</p>
+                    </div>
+                    <div className="mt-4 pt-4 border-t text-xs text-gray-400">
+                        Debug: Global Store Name: {storeUser?.name || 'Not set'}
                     </div>
                 </div>
             )}

@@ -8,9 +8,9 @@ const appBar = () => {
     <div className='p-2 shadow flex gap-6 bg-gradient-to-br from-blue-400 to-cyan-400 text-white items-center'>
       <Link href='/'>Home</Link>
       <Link href='/courses'>Courses</Link>
-      <Link href="/admin/courses/create" className="text-sm hover:underline">
+      {/* <Link href="/admin/courses/create" className="text-sm hover:underline">
         Create Course
-      </Link>
+      </Link> */}
       <div className="ml-auto">
         <AuthButton />
       </div>
