@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "@nestjs/mapped-types": "*",
+    "cookie-parser": "^1.4.7",
+    "fastify": "^5.6.2",
+    "jose": "^6.1.2",
+    "zod": "^4.1.13"
+  },
+  "name": "LMs",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "prettier": "^3.6.2",
+    "turbo": "^2.6.1",
+    "typescript": "5.9.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@11.6.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
