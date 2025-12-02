@@ -34,6 +34,8 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
 
   // Start server (use PORT env if provided, otherwise 8000)
-  await app.listen(process.env.PORT ? Number(process.env.PORT) : 8000);
+  const port = process.env.PORT ? Number(process.env.PORT) : 8000;
+  await app.listen(port);
+  console.log(`Server running on http://localhost:${port}`);
 }
 bootstrap();

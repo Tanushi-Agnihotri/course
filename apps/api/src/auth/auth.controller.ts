@@ -72,4 +72,16 @@ export class AuthController {
       return null;
     }
   }
+
+  @Post('forgot-password')
+  async forgotPassword(@Body('email') email: string) {
+    console.log('Forgot Password Request received for:', email);
+    return await this.authService.forgotPassword(email);
+  }
+
+  @Post('reset-password')
+  async resetPassword(@Body() body: any) {
+    const { token, password } = body;
+    return await this.authService.resetPassword(token, password);
+  }
 }

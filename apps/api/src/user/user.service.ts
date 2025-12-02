@@ -47,6 +47,12 @@ export class UserService {
     });
   }
 
+  async findByResetToken(resetToken: string): Promise<users | null> {
+    return await this.prisma.users.findFirst({
+      where: { resetToken },
+    });
+  }
+
   async login(loginUserDto: LoginUserDto) {
     const { email, password } = loginUserDto;
 
